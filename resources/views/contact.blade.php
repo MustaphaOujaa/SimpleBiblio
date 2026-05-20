@@ -5,12 +5,12 @@
     <main class="py-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold text-gray-900">Prenez Contact Avec Nous</h2>
+                <h2 class="text-4xl font-extrabold text-gray-900">{{ __('messages.contact_title') }}</h2>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <!-- Form -->
                 <div class="lg:col-span-2 bg-white p-8 rounded-lg border border-gray-200 shadow-lg">
-                    <form class="space-y-6" action="{{ route('contact.submit') }}" method="post">
+                    <form class="space-y-6" action="{{ route('contact') }}" method="get">
                         @csrf
                         @if(session('success'))
                             <div class="p-4 rounded-md bg-green-50 text-green-700 border border-green-200">
@@ -18,25 +18,25 @@
                             </div>
                         @endif
                         <div>
-                            <label for="message" class="sr-only">Message</label>
-                            <textarea id="message" name="message" rows="8" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Votre Message"></textarea>
+                            <label for="message" class="sr-only">{{ __('messages.your_message') }}</label>
+                            <textarea id="message" name="message" rows="8" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="{{ __('messages.your_message') }}"></textarea>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="sr-only">Nom</label>
-                                <input type="text" name="name" id="name" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Votre Nom">
+                                <label for="name" class="sr-only">{{ __('messages.your_name') }}</label>
+                                <input type="text" name="name" id="name" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="{{ __('messages.your_name') }}">
                             </div>
                             <div>
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" id="email" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Adresse Email">
+                                <label for="email" class="sr-only">{{ __('messages.email_address') }}</label>
+                                <input type="email" name="email" id="email" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="{{ __('messages.email_address') }}">
                             </div>
                         </div>
                         <div>
-                            <label for="subject" class="sr-only">Sujet</label>
-                            <input type="text" name="subject" id="subject" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Sujet">
+                            <label for="subject" class="sr-only">{{ __('messages.subject') }}</label>
+                            <input type="text" name="subject" id="subject" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div>
-                            <button type="submit" class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">Envoyer</button>
+                            <button type="submit" class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">{{ __('messages.send') }}</button>
                         </div>
                     </form>
                 </div>
@@ -60,7 +60,7 @@
                         <span class="mt-1 mr-4 text-blue-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></span>
                         <div>
                             <h3 class="text-lg text-gray-800 font-semibold">support@ofpptmail.com</h3>
-                            <p>Envoyez-nous votre requête à tout moment !</p>
+                            <p>{{ __('messages.send_request') }}</p>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,33 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     /**
+     * Search books by keyword.
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+        $type = $request->input('type');
+
+        $books = Book::query()
+            ->when($query, function ($q) use ($query) {
+                $q->where('designation', 'like', "%{$query}%")
+                  ->orWhere('auteur', 'like', "%{$query}%")
+                  ->orWhere('description', 'like', "%{$query}%")
+                  ->orWhere('editeur', 'like', "%{$query}%");
+            })
+            ->when($type, function ($q) use ($type) {
+                $q->where('type', $type);
+            })
+            ->latest()
+            ->paginate(8)
+            ->withQueryString();
+
+        $types = Book::select('type')->distinct()->pluck('type');
+
+        return view('book.search', compact('books', 'query', 'types', 'type'));
+    }
+
+    /**
      * Display a listing of the resource.
      */
    public function index(Request $request)
@@ -82,7 +109,7 @@ class BookController extends Controller
 
     $book->save();
 
-    return redirect()->route('book.index')->with('success', 'Livre ajouté avec succès.');
+    return redirect()->route('bookIndex')->with('success', 'Livre ajouté avec succès.');
 }
 
     /**
@@ -137,7 +164,7 @@ public function update(Request $request, $id)
         $book->cover = $imageName;
     }
     $book->save();
-    return redirect()->route('book.index')
+    return redirect()->route('bookIndex')
         ->with('success', 'Livre modifié avec succès.');
 }
 
@@ -157,7 +184,7 @@ public function update(Request $request, $id)
     
     $book->delete();
     
-    return redirect()->route('book.index')->with('success', 'Livre supprimé avec succès.');
+    return redirect()->route('bookIndex')->with('success', 'Livre supprimé avec succès.');
 }
 
 }

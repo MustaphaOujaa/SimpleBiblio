@@ -16,19 +16,24 @@ class BookFactory extends Factory
      */
 public function definition(): array
 {
-return [
+    // Array of varied book cover keywords to get more relevant images
+    $keywords = ['book', 'library', 'novel', 'study', 'history', 'science', 'art'];
+    $keyword = $this->faker->randomElement($keywords);
+    $id = $this->faker->unique()->numberBetween(1, 1000);
+
+    return [
         'designation' => $this->faker->unique()->sentence(3),
-        'description' => $this->faker->paragraph(),
+        'description' => $this->faker->paragraph(5),
         'type' => $this->faker->randomElement(['Texte', 'Image', 'Audio', 'Video']),
-        'langue' => $this->faker->randomElement(['Arabe', 'Francais', 'Anglais', 'Espagnol',
-        'Allemand']),
+        'langue' => $this->faker->randomElement(['Arabe', 'Francais', 'Anglais', 'Espagnol', 'Allemand']),
         'editeur' => $this->faker->company(),
-        'categorie' => $this->faker->randomElement(['Classique', 'Science Fiction',
-        'Fantastique', 'Horreur', 'Romance', 'Mystere']),
-        'prix' => $this->faker->randomFloat(2, 0, 900),
+        'categorie' => $this->faker->randomElement(['Classique', 'Science Fiction', 'Fantastique', 'Horreur', 'Romance', 'Mystere']),
+        'prix' => $this->faker->randomFloat(2, 50, 900),
         'auteur' => $this->faker->name(),
-        'cover' => 'no_cover.jpg',
-];
+        'annee' => $this->faker->year(),
+        // Store a unique unsplash ID to simulate different covers
+        'cover' => 'https://picsum.photos/seed/' . $id . '/400/600',
+    ];
 }
 
 }

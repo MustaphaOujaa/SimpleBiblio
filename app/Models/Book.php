@@ -10,10 +10,41 @@ class Book extends Model
     use HasFactory;
 
     protected $fillable = [
-        'designation', 'description', 'prix', 'auteur',
-        'cover', 'type', 'langue', 'editeur', 'categorie',
-        'media_type_id',
+        'designation', 'designation_ar', 'designation_fr',
+        'description', 'description_ar', 'description_fr',
+        'prix', 'auteur', 'cover', 'type', 'langue', 
+        'editeur', 'categorie', 'media_type_id', 'annee'
     ];
+
+    /**
+     * Get translated designation
+     */
+    public function getDesignationAttribute($value)
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'ar' && $this->designation_ar) {
+            return $this->designation_ar;
+        }
+        if ($locale === 'fr' && $this->designation_fr) {
+            return $this->designation_fr;
+        }
+        return $value;
+    }
+
+    /**
+     * Get translated description
+     */
+    public function getDescriptionAttribute($value)
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'ar' && $this->description_ar) {
+            return $this->description_ar;
+        }
+        if ($locale === 'fr' && $this->description_fr) {
+            return $this->description_fr;
+        }
+        return $value;
+    }
 
     /**
      * Categories (many-to-many)
