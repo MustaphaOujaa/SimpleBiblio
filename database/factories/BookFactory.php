@@ -16,23 +16,37 @@ class BookFactory extends Factory
      */
 public function definition(): array
 {
-    // Array of varied book cover keywords to get more relevant images
-    $keywords = ['book', 'library', 'novel', 'study', 'history', 'science', 'art'];
-    $keyword = $this->faker->randomElement($keywords);
+    $booksList = \Database\Seeders\LibrarySeeder::$books;
+    $book = $this->faker->randomElement($booksList);
+
     $id = $this->faker->unique()->numberBetween(1, 1000);
 
+    $title = $book['designation'];
+    $titleAr = $book['designation_ar'] ?? null;
+    $titleFr = $book['designation_fr'] ?? null;
+
+    // To prevent unique constraint violation on designation when generating many books
+    if ($id > 20) {
+        $title .= ' (' . $id . ')';
+        if ($titleAr) $titleAr .= ' (' . $id . ')';
+        if ($titleFr) $titleFr .= ' (' . $id . ')';
+    }
+
     return [
-        'designation' => $this->faker->unique()->sentence(3),
-        'description' => $this->faker->paragraph(5),
-        'type' => $this->faker->randomElement(['Texte', 'Image', 'Audio', 'Video']),
-        'langue' => $this->faker->randomElement(['Arabe', 'Francais', 'Anglais', 'Espagnol', 'Allemand']),
-        'editeur' => $this->faker->company(),
-        'categorie' => $this->faker->randomElement(['Classique', 'Science Fiction', 'Fantastique', 'Horreur', 'Romance', 'Mystere']),
-        'prix' => $this->faker->randomFloat(2, 50, 900),
-        'auteur' => $this->faker->name(),
-        'annee' => $this->faker->year(),
-        // Store a unique unsplash ID to simulate different covers
-        'cover' => 'https://picsum.photos/seed/' . $id . '/400/600',
+        'designation' => $title,
+        'designation_ar' => $titleAr,
+        'designation_fr' => $titleFr,
+        'description' => $book['description'],
+        'description_ar' => $book['description_ar'] ?? null,
+        'description_fr' => $book['description_fr'] ?? null,
+        'type' => $book['type'] ?? 'Texte',
+        'langue' => $book['langue'] ?? 'Multi',
+        'editeur' => $book['editeur'] ?? 'HarperOne',
+        'categorie' => $book['categorie'] ?? 'Littérature',
+        'prix' => $book['prix'] ?? $this->faker->randomFloat(2, 50, 900),
+        'auteur' => $book['auteur'],
+        'annee' => $book['annee'] ?? 2020,
+        'cover' => $book['cover'],
     ];
 }
 

@@ -25,7 +25,7 @@
                                 <div
                                     class="premium-card p-2 bg-gray-50 border-gray-100 shadow-inner aspect-[3/4] overflow-hidden">
                                     <img class="w-full h-full rounded-lg object-cover shadow-sm transition duration-500 hover:scale-105"
-                                        src="{{ str_starts_with($book->cover, 'http') ? $book->cover : asset('covers/' . $book->cover) }}"
+                                        src="{{ !empty($book->cover) && str_starts_with($book->cover, 'http') ? $book->cover : asset('covers/' . (!empty($book->cover) ? $book->cover : 'no_cover.jpg')) }}"
                                         alt="{{ $book->designation }}">
                                 </div>
                             </div>
@@ -104,15 +104,20 @@
                                 </svg>
                                 {{ __('messages.buy') }}
                             </a>
-                            <a href="mailto:?subject={{ rawurlencode($book->designation) }}"
-                                class="btn-hover-fx flex items-center justify-center gap-3 w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-base shadow-lg shadow-blue-100">
-                                <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                {{ __('messages.send') }}
-                            </a>
+                            @auth
+                            <form action="{{ route('book.send_email', $book->id) }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit"
+                                    class="btn-hover-fx flex items-center justify-center gap-3 w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-base shadow-lg shadow-blue-100 transition duration-300 hover:bg-blue-700 hover:-translate-y-1">
+                                    <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                    {{ __('messages.send') ?? 'Send' }}
+                                </button>
+                            </form>
+                            @endauth
                         </div>
                     </div>
                 </div>

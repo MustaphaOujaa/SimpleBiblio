@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -80,17 +82,8 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
 {
-    $request->validate([
-        'designation' => 'required|string|max:255',
-        'auteur' => 'required|string|max:255',
-        'prix' => 'required|numeric|min:0',
-        'type' => 'required|string|max:255',
-        'description' => 'nullable|string', 
-        'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-
     $book = new Book();
     $book->designation = $request->input('designation');
     $book->auteur = $request->input('auteur');
@@ -133,17 +126,8 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-public function update(Request $request, $id)
+public function update(UpdateBookRequest $request, $id)
 {
-    $request->validate([
-        'designation' => 'required|string|max:255',
-        'auteur' => 'required|string|max:255',
-        'prix' => 'required|numeric|min:0',
-        'type' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
-
     $book = Book::findOrFail($id);
 
     $book->designation = $request->designation;
@@ -187,5 +171,17 @@ public function update(Request $request, $id)
     return redirect()->route('bookIndex')->with('success', 'Livre supprimé avec succès.');
 }
 
-}
+    /**
+     * Send book details via email.
+     */
+    public function sendEmail(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        
+        // Send to authenticated user's email
+        \Illuminate\Support\Facades\Mail::to(auth()->user()->email)
+            ->send(new \App\Mail\BookDetailsMail($book));
 
+        return redirect()->back()->with('success', __('messages.email_sent') ?? 'Email sent successfully!');
+    }
+}

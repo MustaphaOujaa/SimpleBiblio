@@ -75,7 +75,7 @@
                             <!-- Book Cover -->
                             <!-- Book Cover -->
                             <div class="aspect-[3/4] overflow-hidden bg-gray-50 flex items-center justify-center">
-                            <img src="{{ str_starts_with($book->cover, 'http') ? $book->cover : asset('covers/' . $book->cover) }}"
+                            <img src="{{ !empty($book->cover) && str_starts_with($book->cover, 'http') ? $book->cover : asset('covers/' . (!empty($book->cover) ? $book->cover : 'no_cover.jpg')) }}"
                                 alt="{{ $book->designation }}"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>

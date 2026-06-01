@@ -78,7 +78,7 @@
                         </label>
                         @if($book->cover && $book->cover != 'no_cover.jpg')
                             <div class="mb-2">
-                                <img src="/covers/{{ $book->cover }}" alt="cover" class="w-24 h-32 object-cover rounded">
+                                <img src="{{ !empty($book->cover) && str_starts_with($book->cover, 'http') ? $book->cover : asset('covers/' . (!empty($book->cover) ? $book->cover : 'no_cover.jpg')) }}" alt="cover" class="w-24 h-32 object-cover rounded">
                             </div>
                         @endif
                         <input type="file" id="cover" name="cover" accept="image/*"
