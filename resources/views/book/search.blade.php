@@ -42,7 +42,7 @@
                         <!-- Search Button -->
                         <div>
                             <button type="submit"
-                                class="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300 shadow-md hover:shadow-lg">
+                                class="btn-text-fit btn-polished w-full sm:w-auto min-w-24 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300 shadow-md hover:shadow-lg">
                                 {{ __('messages.search') }}
                             </button>
                         </div>
@@ -94,7 +94,7 @@
 
                                 <!-- Action -->
                                 <a href="{{ route('book.show', $book->id) }}"
-                                    class="block w-full text-center py-2.5 bg-blue-50 text-blue-600 font-medium rounded-lg hover:bg-blue-100 transition duration-200">
+                                    class="btn-text-fit w-full py-2.5 px-3 bg-blue-50 text-blue-600 font-medium rounded-lg hover:bg-blue-100 transition duration-200">
                                     {{ __('messages.view') }}
                                 </a>
                             </div>

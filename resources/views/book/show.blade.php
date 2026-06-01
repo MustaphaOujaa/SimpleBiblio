@@ -3,10 +3,16 @@
 @section("content")
     <main class="py-10 bg-gray-50 flex-grow">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            @if (session('success'))
+                <div class="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <!-- Back Action -->
             <div class="mb-6">
                 <a href="{{ route('bookIndex') }}"
-                    class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-bold transition">
+                    class="btn-text-fit inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-bold transition">
                     <svg class="w-5 h-5 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -96,7 +102,7 @@
                         <!-- Actions Grid inside the card for structure -->
                         <div class="mt-8 grid grid-cols-1 gap-3">
                             <a href="#"
-                                class="btn-hover-fx flex items-center justify-center gap-3 w-full py-4 bg-emerald-600 text-white rounded-xl font-bold text-base shadow-lg shadow-emerald-100">
+                                class="btn-text-fit btn-polished btn-hover-fx flex items-center justify-center gap-3 w-full py-4 px-4 bg-emerald-600 text-white rounded-xl font-bold text-base shadow-lg shadow-emerald-100">
                                 <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
@@ -108,7 +114,7 @@
                             <form action="{{ route('book.send_email', $book->id) }}" method="POST" class="w-full">
                                 @csrf
                                 <button type="submit"
-                                    class="btn-hover-fx flex items-center justify-center gap-3 w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-base shadow-lg shadow-blue-100 transition duration-300 hover:bg-blue-700 hover:-translate-y-1">
+                                    class="btn-text-fit btn-polished btn-hover-fx flex items-center justify-center gap-3 w-full py-4 px-4 bg-blue-600 text-white rounded-xl font-bold text-base shadow-lg shadow-blue-100 transition duration-300 hover:bg-blue-700 hover:-translate-y-1">
                                     <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">

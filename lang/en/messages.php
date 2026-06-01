@@ -51,6 +51,7 @@ return [
     'category' => 'Category',
     'price' => 'Price',
     'buy' => 'Buy',
+    'email_sent' => 'Book details were sent to your email address.',
 
     // About
     'about_subtitle' => 'What we do',

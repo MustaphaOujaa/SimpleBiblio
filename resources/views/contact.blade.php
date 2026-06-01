@@ -36,7 +36,7 @@
                             <input type="text" name="subject" id="subject" class="w-full px-4 py-3 rounded-md bg-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="{{ __('messages.subject') }}">
                         </div>
                         <div>
-                            <button type="submit" class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">{{ __('messages.send') }}</button>
+                            <button type="submit" class="btn-text-fit btn-polished min-w-24 px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">{{ __('messages.send') }}</button>
                         </div>
                     </form>
                 </div>

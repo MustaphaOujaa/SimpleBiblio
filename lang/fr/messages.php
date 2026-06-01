@@ -51,6 +51,7 @@ return [
     'category' => 'Catégorie',
     'price' => 'Prix',
     'buy' => 'Acheter',
+    'email_sent' => 'Les details du livre ont ete envoyes a votre adresse email.',
 
     // About
     'about_subtitle' => 'Ce que nous faisons',

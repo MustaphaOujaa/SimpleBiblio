@@ -33,11 +33,11 @@
                         <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-blue-600 font-bold text-sm transition">{{ __('messages.dashboard') }}</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white font-bold text-sm px-4 py-2 rounded-xl transition">{{ __('messages.logout') }}</button>
+                            <button type="submit" class="btn-text-fit btn-text-fit-sm bg-red-50 text-red-600 hover:bg-red-600 hover:text-white font-bold px-4 py-2 rounded-xl transition">{{ __('messages.logout') }}</button>
                         </form>
                     @else
                         <a href="{{ route('register') }}" class="text-gray-700 hover:text-blue-600 font-bold text-sm transition">{{ __('messages.register') }}</a>
-                        <a href="{{ route('login') }}" class="bg-blue-600 text-white hover:bg-blue-700 font-bold text-sm px-6 py-2.5 rounded-xl shadow-lg shadow-blue-100 transition btn-premium">{{ __('messages.login') }}</a>
+                        <a href="{{ route('login') }}" class="btn-text-fit btn-text-fit-sm btn-polished bg-blue-600 text-white hover:bg-blue-700 font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-blue-100 transition btn-premium">{{ __('messages.login') }}</a>
                     @endauth
                 </div>
             </div>

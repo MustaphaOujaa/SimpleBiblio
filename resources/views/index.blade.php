@@ -21,7 +21,7 @@
                             </select>
                         </div>
                         <div class="mt-2 sm:mt-0 sm:ml-2">
-                            <button type="submit" class="w-full sm:w-auto px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">{{ __('messages.find_btn') }}</button>
+                            <button type="submit" class="btn-text-fit btn-polished w-full sm:w-auto min-w-24 px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">{{ __('messages.find_btn') }}</button>
                         </div>
                     </form>
                 </div>

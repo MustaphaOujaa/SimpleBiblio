@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Mail\BookDetailsMail;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookController extends Controller
 {
@@ -178,10 +180,8 @@ public function update(UpdateBookRequest $request, $id)
     {
         $book = Book::findOrFail($id);
         
-        // Send to authenticated user's email
-        \Illuminate\Support\Facades\Mail::to(auth()->user()->email)
-            ->send(new \App\Mail\BookDetailsMail($book));
+        Mail::to($request->user()->email)->send(new BookDetailsMail($book));
 
-        return redirect()->back()->with('success', __('messages.email_sent') ?? 'Email sent successfully!');
+        return redirect()->back()->with('success', __('messages.email_sent'));
     }
 }

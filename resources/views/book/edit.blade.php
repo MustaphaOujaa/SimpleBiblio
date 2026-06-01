@@ -85,13 +85,13 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
-                    <div class="flex justify-end space-x-4 pt-4">
+                    <div class="flex flex-wrap justify-end gap-3 pt-4">
                         <a href="{{ route('bookIndex') }}"
-                            class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                            class="btn-text-fit min-w-24 px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
                             {{ __('messages.cancel') }}
                         </a>
                         <button type="submit"
-                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            class="btn-text-fit btn-polished min-w-28 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             {{ __('messages.save_changes') }}
                         </button>
                     </div>
