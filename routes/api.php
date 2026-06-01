@@ -1,24 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\TaskApiController;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-Route::post('/token', function (Request $request) {
-    if (!Auth::attempt($request->only('email', 'password'))) {
-        return response()->json(['message' => 'Invalid credentials'], 401);
-    }
-    $token = $request->user()->createToken('api-token')->plainTextToken;
-    return response()->json(['token' => $token]);
-});
+Route::post('/register', [AuthApiController::class, 'register']);
+Route::post('/login', [AuthApiController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [AuthApiController::class, 'me']);
+    Route::post('/logout', [AuthApiController::class, 'logout']);
+
     Route::name('api.')->group(function () {
         Route::apiResource('tasks', TaskApiController::class);
-    });
-
-    Route::get('/user', function (Request $request) {
-        return $request->user();
     });
 });
